@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
- "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "dev": "nodemon server/index.js"
@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.87.1",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1"
   },
   "devDependencies": {
