@@ -10,10 +10,9 @@ const PORT = process.env.PORT || 8080;
 // Supabase connection
 const connectSupabase = async () => {
   try {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('flashcards')
       .select('*')
-      .limit(5)
 
     console.log('Connected to Supabase!!')
     console.log('Data in flashcards db: ', data)
@@ -27,6 +26,19 @@ connectSupabase();
 //creates an endpoint for the route /api
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from ExpressJS' });
+});
+
+app.get('/flashcards', async (req, res) => {
+  try {
+    const { data } = await supabase
+      .from('flashcards')
+      .select('*')
+
+    res.json(data);
+  } catch (error) {
+    res.json({ error: error.message });
+
+  }
 });
 
 // console.log that your server is up and running
