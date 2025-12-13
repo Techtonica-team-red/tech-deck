@@ -27,6 +27,7 @@ app.get('/api/cards', async(req, res) =>{
   }
 })
 
+// Create new flashcards
 app.post('/api/cards', async(req, res) => {
   try {
     const { question, answer, category, difficulty } = req.body;
