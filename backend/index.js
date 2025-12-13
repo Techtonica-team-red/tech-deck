@@ -1,11 +1,28 @@
-// server/index.js
-
 import express from 'express';
+import 'dotenv/config'
+import supabase from './supabaseClient.js'
 
 const app = express();
 
 //Set the port that you want the server to run on
 const PORT = process.env.PORT || 8080;
+
+// Supabase connection
+const connectSupabase = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('flashcards')
+      .select('*')
+      .limit(5)
+
+    console.log('Connected to Supabase!!')
+    console.log('Data in flashcards db: ', data)
+  } catch (error) {
+    console.log('ERROR!! SUpabase not connected!', error)
+  }
+}
+
+connectSupabase();
 
 //creates an endpoint for the route /api
 app.get('/api', (req, res) => {
