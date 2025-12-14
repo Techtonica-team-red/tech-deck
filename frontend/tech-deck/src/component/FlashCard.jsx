@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 
-const FlashCard = ({ card }) => {
-  const [flipped, setFlipped] = useState(false);
+const FlashCard = ({ card, flipped, setFlipped }) => {
+  
 
   return (
     <div 

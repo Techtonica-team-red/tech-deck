@@ -6,6 +6,7 @@ import CardButton from './component/CardButton.jsx';
 function App() {
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [flipped, setFlipped] = useState(false);
   const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
@@ -24,6 +25,8 @@ function App() {
 
   // If first card, prev = last card
   const handlePrev = () => {
+    // Reset flipped
+    setFlipped(false);
     setCurrentIndex((prev) =>
       prev === 0 ? cards.length - 1 : prev - 1
     );
@@ -31,6 +34,7 @@ function App() {
 
   // If last card, next = first card
   const handleNext = () => {
+    setFlipped(false);
     setCurrentIndex((prev) =>
       prev === cards.length - 1 ? 0 : prev + 1
     );
@@ -46,6 +50,8 @@ function App() {
           <>
             <FlashCard 
               card={cards[currentIndex]}
+              flipped={flipped}
+              setFlipped={setFlipped}
             />
 
             <CardButton 
