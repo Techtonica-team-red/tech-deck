@@ -3,13 +3,13 @@ import './App.css'
 import FlashCard from './component/FlashCard.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [cards, setCards] = useState([])
+  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/cards');
+        const response = await fetch(`${BACKEND_URL}/api/cards`);
         const data = await response.json();
         console.log("API data:", data);
         setCards(data);
