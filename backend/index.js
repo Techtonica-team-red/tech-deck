@@ -46,6 +46,22 @@ app.post('/api/cards', async(req, res) => {
   }
 })
 
+app.put('/api/cards/:id', async(req, res) => {
+  try {
+    const { id } = req.params
+    const { question, answer, category, difficulty } = req.body;
+    const data = await pool.query(
+      `UPDATE flashcards SET  question = $1, answer = $2, category = $3, difficulty = $4
+      WHERE id = $5
+      RETURNING *`,
+      [question, answer, category, difficulty, id]
+    );
+    } catch(error) {
+    console.log(error)
+    res.status(500).json({ error: error.message });
+
+    }
+})
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
