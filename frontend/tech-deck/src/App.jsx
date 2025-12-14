@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import FlashCard from './component/FlashCard.jsx';
-import CardButton from './component/CardButton.jsx';
+import FlashCard from './components/FlashCard';
+import CardButton from './components/CardButton.jsx';
+import Form from './components/Form.jsx'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
+  const [openForm, setOpenForm] = useState(false);
 
-  useEffect(() => {
-    const fetchCards = async () => {
+  const fetchCards = async () => {
       try {
         const response = await fetch(`${BACKEND_URL}/api/cards`);
         const data = await response.json();
@@ -19,10 +21,13 @@ function App() {
       } catch (error) {
         console.warn(error);
       }
-    }
+  }
+
+  useEffect(() => {
     fetchCards();
+    }
     // Only fetch once
-  },[])
+    ,[])
 
   // If first card, prev = last card
   const handlePrev = () => {
@@ -63,9 +68,18 @@ function App() {
         ) : (
           <p>Loading cards...</p>
         )
-      }
+        }
+        {openForm ? (
+          <>
+            <button onClick={() => setOpenForm(false)}>Cancel</button>
+            
+            <Form onCancel={() => setOpenForm(false)} 
+              onAddSuccess={fetchCards}/>
+          </>
+        ) : (
+          <button onClick={() => setOpenForm(true)}>Create new Card</button>
+        )}
       </div>
-      
     </>
   )
 }
