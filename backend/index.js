@@ -46,22 +46,18 @@ app.post('/api/cards', async(req, res) => {
   }
 })
 
-app.put('/api/cards/:id', async(req, res) => {
+// Delete flash cards
+app.delete('/api/cards/:id', async(req,res) => {
+  const id = req.params.id;
   try {
-    const { id } = req.params
-    const { question, answer, category, difficulty } = req.body;
-    const data = await pool.query(
-      `UPDATE flashcards SET  question = $1, answer = $2, category = $3, difficulty = $4
-      WHERE id = $5
-      RETURNING *`,
-      [question, answer, category, difficulty, id]
-    );
-    } catch(error) {
-    console.log(error)
-    res.status(500).json({ error: error.message });
-
-    }
+    const result = await pool.query("DELETE FROM flashcards WHERE id = $1", [id]);
+    res.json({ message: "Card deleted", id });
+  } catch (error) {
+    console.error("Server Error", error);
+    res.status(500).json({ error: "Failed to delete card" });
+  }
 })
+
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
