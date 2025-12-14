@@ -10,6 +10,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -65,9 +66,17 @@ function App() {
         ) : (
           <p>Loading cards...</p>
         )
-      }
+        }
+        {openForm ? (
+          <>
+            <button onClick={() => setOpenForm(false)}>Cancel</button>
+            
+            <Form onCancel={() => setOpenForm(false)} />
+          </>
+        ) : (
+          <button onClick={() => setOpenForm(true)}>Create new Card</button>
+        )}
       </div>
-      
     </>
   )
 }
