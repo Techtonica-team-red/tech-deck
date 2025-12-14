@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import FlashCard from './component/FlashCard.jsx'
+import { useEffect, useState } from 'react';
+import './App.css';
+import FlashCard from './component/FlashCard.jsx';
+import CardButton from './component/CardButton.jsx';
 
 function App() {
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [flipped, setFlipped] = useState(false);
   const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
@@ -18,17 +21,49 @@ function App() {
       }
     }
     fetchCards();
+    // Only fetch once
   },[])
+
+  // If first card, prev = last card
+  const handlePrev = () => {
+    // Reset flipped
+    setFlipped(false);
+    setCurrentIndex((prev) =>
+      prev === 0 ? cards.length - 1 : prev - 1
+    );
+  }
+
+  // If last card, next = first card
+  const handleNext = () => {
+    setFlipped(false);
+    setCurrentIndex((prev) =>
+      prev === cards.length - 1 ? 0 : prev + 1
+    );
+  }
 
   return (
     <>
       <div>
-        {cards.map((card) => (
-              <FlashCard 
-                key={card.id} 
-                card={card} 
-              />
-        ))}
+        {/* We used async function to fetch data, but card was set to empty, index set to 0 before data fetched
+        This will result nothing returned. */}
+        {cards.length>0?
+        (
+          <>
+            <FlashCard 
+              card={cards[currentIndex]}
+              flipped={flipped}
+              setFlipped={setFlipped}
+            />
+
+            <CardButton 
+              onPrev={handlePrev}
+              onNext={handleNext}
+            />
+          </>
+        ) : (
+          <p>Loading cards...</p>
+        )
+      }
       </div>
       
     </>
