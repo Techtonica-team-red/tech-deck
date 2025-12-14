@@ -19,6 +19,30 @@ export default function Form () {
 
     const [difficulty, setDifficulty] = useState ('medium')
 
+    const handleCategoryChange = (event) => {
+        const value = event.target.value;
+
+        if (value === 'add-category') {
+            const newCategoryName = prompt("Enter a new category: ");
+
+            if (!newCategoryName) return; // Do nothing if value is empty
+
+            const categoryObj = {
+                value: newCategoryName.toLowerCase().replace(/\s+/g, '-'),
+                label: newCategoryName
+            };
+
+            setCategories([...categories, categoryObj]);
+            setCategory(categoryObj.value);
+        } else {
+            setCategory(value)
+        }
+    }
+
+    const handleDifficultyChange = (event) => {
+        setDifficulty(event.target.value);
+    }
+
     const handleSubmit = async (event) => {}
 
     return (
@@ -35,12 +59,21 @@ export default function Form () {
             <br/>
             <label>
                 Category:
-                <select></select>
+                <select value={category} onChange={handleCategoryChange}>
+                    {categories.map((c) => (
+                        <option key={c.value} value={c.value}>{c.label}</option>
+                    ))}
+                    <option value="add-category">Add category</option>
+                </select>
             </label>
             <br/>
             <label>
                 Difficulty:
-                <select></select>
+                <select value={difficulty} onChange={handleDifficultyChange}>
+                    {difficulties.map((d) => (
+                        <option key={d.value} value={d.value}>{d.label}</option>
+                    ))}
+                </select>
             </label>
             <br/>
             <button type="submit">Create</button>
