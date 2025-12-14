@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import FlashCard from './components/FlashCard';
+import FlashCard from './components/FlashCard.jsx';
+import DeleteButton from './components/DeleteButton.jsx';
 import CardButton from './components/CardButton.jsx';
 import Form from './components/Form.jsx'
 
@@ -18,6 +19,7 @@ function App() {
         const data = await response.json();
         console.log("API data:", data);
         setCards(data);
+        setCurrentIndex(0);
       } catch (error) {
         console.warn(error);
       }
@@ -28,6 +30,24 @@ function App() {
     }
     // Only fetch once
     ,[])
+   
+  const deleteCards = async(id) =>{
+    const confirmDelete = window.confirm("Are you sure you wanna delete the flash card?");
+    // Do nothing if cancelled
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/cards/${id}`, {
+        method: 'DELETE',
+      });
+      console.log("Deleting card id:", id);
+      if (response.ok) {
+        fetchCards();
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 
   // If first card, prev = last card
   const handlePrev = () => {
@@ -70,6 +90,10 @@ function App() {
               onPrev={handlePrev}
               onNext={handleNext}
               style={{ color: 'white', backgroundColor: '#01556e' }}
+            />
+            <DeleteButton 
+            card={cards[currentIndex]}
+            onDelete={deleteCards}
             />
           </>
         ) : (
