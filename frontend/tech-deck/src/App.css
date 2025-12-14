@@ -79,4 +79,33 @@
 
 .card-back {
   transform: rotateY(180deg);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.meta-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.meta-tag {
+  background-color: yellow;
+  border: 1px solid yellow;
+  padding: 6px 14px;
+  border-radius: 99px;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+
+  display: flex; 
+  align-items: center;
+  gap: 6px;
+  
+  transition: background-color 0.2s;
 }

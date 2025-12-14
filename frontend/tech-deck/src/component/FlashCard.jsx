@@ -15,8 +15,10 @@ const FlashCard = ({ card, flipped, setFlipped }) => {
 
           <div className="card-back">
             <h3>{card.answer}</h3>
-            <p>{card.difficulty}</p>
-            <p>{card.tag}</p>
+            <div className="meta-container">
+              <span className="meta-tag">{card.difficulty}</span>
+              <span className="meta-tag">{card.category}</span>
+            </div>
           </div>
         </div>
       
