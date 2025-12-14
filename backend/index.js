@@ -48,7 +48,7 @@ app.post('/api/cards', async(req, res) => {
 
 app.put('/api/cards/:id', async(req, res) => {
   try {
-    const id = req.params
+    const { id } = req.params
     const { question, answer, category, difficulty } = req.body;
     const data = await pool.query(
       `UPDATE flashcards SET  question = $1, answer = $2, category = $3, difficulty = $4
