@@ -27,6 +27,25 @@ app.get('/api/cards', async(req, res) =>{
   }
 })
 
+// Create new flashcards
+app.post('/api/cards', async(req, res) => {
+  try {
+    const { question, answer, category, difficulty } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO flashcards (question, answer, category, difficulty)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+      [question, answer, category, difficulty]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.log("ERROR! SOmething went wrong!", error)
+    res.status(500).json({ error: error.message });
+  }
+})
+
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
