@@ -59,7 +59,7 @@ function App() {
               flipped={flipped}
               setFlipped={setFlipped}
             />
-
+            <p className='progress'>{currentIndex + 1} / {cards.length}</p>
             <CardButton 
               onPrev={handlePrev}
               onNext={handleNext}
