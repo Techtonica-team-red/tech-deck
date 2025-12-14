@@ -1,8 +1,14 @@
 
 
-function Flashcard() {
+function Flashcard(props) {
+
   return (
-    <h2>Flashcard</h2>
+    <div>
+      <h2>{props.question}</h2>
+      <p>{props.answer}</p>
+      <span>{props.category}</span>
+      <span>Difficult: {props.difficulty}</span>
+    </div>
   )
 }
 
