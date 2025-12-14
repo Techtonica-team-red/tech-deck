@@ -6,7 +6,7 @@ import FlashCard from './component/FlashCard.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [card, setCard] = useState([])
+  const [cards, setCards] = useState([])
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -14,7 +14,7 @@ function App() {
         const response = await fetch('http://localhost:8080/api/cards');
         const data = await response.json();
         console.log("API data:", data);
-        setCard(data);
+        setCards(data);
       } catch (error) {
         console.warn(error);
       }
@@ -25,10 +25,10 @@ function App() {
   return (
     <>
       <div>
-        {card.map((singleCard) => (
+        {cards.map((card) => (
               <FlashCard 
-                key={singleCard.id} 
-                card={singleCard} 
+                key={card.id} 
+                card={card} 
               />
         ))}
       </div>
