@@ -41,6 +41,22 @@
   color: #888;
 }
 
+#app-title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+}
+
+#app-title .thin {
+  font-weight: 300;
+  color: #20819c;
+}
+#app-title .thick {
+  font-weight: 700;
+  color: #01556e;
+}
+
 .flash-card {
   height: 250px;
   width: 100%;

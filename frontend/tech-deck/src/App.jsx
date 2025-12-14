@@ -49,6 +49,10 @@ function App() {
   return (
     <>
       <div>
+        <h2 id="app-title">
+          <span className="thin">tech</span>
+          <span className="bold">tonica</span>
+        </h2>
         {/* We used async function to fetch data, but card was set to empty, index set to 0 before data fetched
         This will result nothing returned. */}
         {cards.length>0?
