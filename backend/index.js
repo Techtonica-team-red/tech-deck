@@ -16,7 +16,7 @@ app.get('/api', (req, res) => {
   res.json({ message: 'Hello from ExpressJS' });
 });
 
-// Get flashcards
+// Get flashcards and filter by difficulty and category
 app.get('/api/cards', async(req, res) => {
   try {
     const { difficulty, category } = req.query;
