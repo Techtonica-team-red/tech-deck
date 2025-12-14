@@ -21,6 +21,7 @@ function App() {
       }
     }
     fetchCards();
+    // Only fetch once
   },[])
 
   // If first card, prev = last card
