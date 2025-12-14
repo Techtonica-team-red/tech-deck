@@ -17,15 +17,35 @@ app.get('/api', (req, res) => {
 });
 
 // Get flashcards
-app.get('/api/cards', async(req, res) =>{
-  try{
-    const result = await pool.query('SELECT * FROM flashcards ORDER BY id ASC');
+app.get('/api/cards', async(req, res) => {
+  try {
+    const { difficulty, category } = req.query;
+    let query = 'SELECT * FROM flashcards';
+    let conditions = [];
+    let params = [];
+
+    if (difficulty) {
+      params.push(difficulty);
+      conditions.push(`difficulty = $${params.length}`);
+    }
+
+    if (category) {
+      params.push(category);
+      conditions.push(`category = $${params.length}`);
+    }
+
+    if (conditions.length) {
+      query += ' WHERE ' + conditions.join(' AND ');
+    }
+    query += ' ORDER BY id ASC';
+
+    const result = await pool.query(query, params);
     res.json(result.rows);
   } catch (error) {
     console.warn(error);
     res.status(500).json({ error });
   }
-})
+});
 
 // Create new flashcards
 app.post('/api/cards', async(req, res) => {
@@ -44,7 +64,7 @@ app.post('/api/cards', async(req, res) => {
     console.log("ERROR! SOmething went wrong!", error)
     res.status(500).json({ error: error.message });
   }
-})
+});
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
