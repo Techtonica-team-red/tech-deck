@@ -39,14 +39,24 @@ function App() {
   return (
     <>
       <div>
-        <FlashCard 
-          card={cards[currentIndex]}
-        />
+        {/* We used async function to fetch data, but card was set to empty, index set to 0 before data fetched
+        This will result nothing returned. */}
+        {cards.length>0?
+        (
+          <>
+            <FlashCard 
+              card={cards[currentIndex]}
+            />
 
-        <CardButton 
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
+            <CardButton 
+              onPrev={handlePrev}
+              onNext={handleNext}
+            />
+          </>
+        ) : (
+          <p>Loading cards...</p>
+        )
+      }
       </div>
       
     </>
