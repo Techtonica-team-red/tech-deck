@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import FlashCard from './component/FlashCard.jsx'
+import { useEffect, useState } from 'react';
+import './App.css';
+import FlashCard from './component/FlashCard.jsx';
+import CardButton from './component/CardButton.jsx';
 
 function App() {
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
@@ -20,15 +22,31 @@ function App() {
     fetchCards();
   },[])
 
+  // If first card, prev = last card
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? cards.length - 1 : prev - 1
+    );
+  }
+
+  // If last card, next = first card
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === cards.length - 1 ? 0 : prev + 1
+    );
+  }
+
   return (
     <>
       <div>
-        {cards.map((card) => (
-              <FlashCard 
-                key={card.id} 
-                card={card} 
-              />
-        ))}
+        <FlashCard 
+          card={cards[currentIndex]}
+        />
+
+        <CardButton 
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
       </div>
       
     </>
