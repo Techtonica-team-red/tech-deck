@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import FlashCard from './components/FlashCard';
 import CardButton from './components/CardButton.jsx';
+import Form from './components/Form.jsx'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
