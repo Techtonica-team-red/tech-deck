@@ -1,4 +1,26 @@
+import { useState } from 'react'; 
+
 export default function Form () {
+    
+    const [categories, setCategories] = useState ([
+        { value: 'html', label: 'HTML' },
+        { value: 'css', label: 'CSS' },
+        { value: 'js', label: 'JavaScript' },
+        { value: 'react', label: 'React' },
+    ]);
+
+    const [category, setCategory] = useState('react');
+
+    const difficulties = [
+        { value: 'easy', label: 'Easy' },
+        { value: 'medium', label: 'Medium' },
+        { value: 'hard', label: 'Hard' },
+    ]
+
+    const [difficulty, setDifficulty] = useState ('medium')
+
+    const handleSubmit = async (event) => {}
+
     return (
         <form onSubmit={handleSubmit}>
             <label>
