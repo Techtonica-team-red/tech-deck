@@ -10,3 +10,9 @@ Techdech is a fullstack app that makes better use of your study time. The abilit
 
 Created by Siyi, Dari, and Adrian.
 
+## How to Run
+
+1. Clone PATH
+2. install dependencies
+3. Command `npm run dev`
+4. Open on designated PORT 
