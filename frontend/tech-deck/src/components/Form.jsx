@@ -1,5 +1,7 @@
 import { useState } from 'react'; 
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Form () {
     
     const [categories, setCategories] = useState ([
@@ -43,7 +45,40 @@ export default function Form () {
         setDifficulty(event.target.value);
     }
 
-    const handleSubmit = async (event) => {}
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = {
+            question:  event.target.question.value,
+            answer: event.target.answer.value,
+            category: category,
+            difficulty: difficulty
+        };
+
+        try {
+            const req = await fetch(`${BACKEND_URL}/api/cards`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (req.ok) {
+                const res = await req.json();
+                console.log("Created card: ", res);
+                event.target.reset();
+                setCategory('react');
+                setDifficulty('medium');
+            } else {
+                console.log('ERROR!!! Form not sent!')
+            }
+
+            console.log('Form was submitted: ', formData)
+        } catch (error) {
+            console.log('ERROR!!! Form not sent! Error caught.', error)
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit}>
