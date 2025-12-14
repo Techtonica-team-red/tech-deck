@@ -85,12 +85,12 @@
   font-size: 20px;
   padding: 20px;
   border-radius: 10px;
-  background: white;
-  color:black;
+  color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fc7625;
 }
 
 .card-back {
@@ -109,8 +109,8 @@
 }
 
 .meta-tag {
-  background-color: yellow;
-  border: 1px solid yellow;
+  background-color: #01556e;
+  border: 1px solid #01556e;
   padding: 6px 14px;
   border-radius: 99px;
 
