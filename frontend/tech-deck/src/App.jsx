@@ -65,10 +65,11 @@ function App() {
               flipped={flipped}
               setFlipped={setFlipped}
             />
-            <p className='progress'>{currentIndex + 1} / {cards.length}</p>
+            <p className='progress darkCyanText'><strong>{currentIndex + 1} / {cards.length}</strong></p>
             <CardButton 
               onPrev={handlePrev}
               onNext={handleNext}
+              style={{ color: 'white', backgroundColor: '#01556e' }}
             />
           </>
         ) : (
