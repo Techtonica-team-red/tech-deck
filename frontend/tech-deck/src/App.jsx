@@ -12,8 +12,7 @@ function App() {
   const [flipped, setFlipped] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
-  useEffect(() => {
-    const fetchCards = async () => {
+  const fetchCards = async () => {
       try {
         const response = await fetch(`${BACKEND_URL}/api/cards`);
         const data = await response.json();
@@ -22,10 +21,13 @@ function App() {
       } catch (error) {
         console.warn(error);
       }
-    }
+  }
+
+  useEffect(() => {
     fetchCards();
+    }
     // Only fetch once
-  },[])
+    ,[])
 
   // If first card, prev = last card
   const handlePrev = () => {
@@ -71,7 +73,8 @@ function App() {
           <>
             <button onClick={() => setOpenForm(false)}>Cancel</button>
             
-            <Form onCancel={() => setOpenForm(false)} />
+            <Form onCancel={() => setOpenForm(false)} 
+              onAddSuccess={fetchCards}/>
           </>
         ) : (
           <button onClick={() => setOpenForm(true)}>Create new Card</button>

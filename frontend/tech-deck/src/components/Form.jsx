@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export default function Form () {
+export default function Form ({ onAddSuccess }) {
     
     const [categories, setCategories] = useState ([
         { value: 'html', label: 'HTML' },
@@ -70,6 +70,8 @@ export default function Form () {
                 event.target.reset();
                 setCategory('react');
                 setDifficulty('medium');
+                onAddSuccess();
+
             } else {
                 console.log('ERROR!!! Form not sent!')
             }
