@@ -46,6 +46,18 @@ app.post('/api/cards', async(req, res) => {
   }
 })
 
+// Delete flash cards
+app.delete('/api/cards/:id', async(req,res) => {
+  const id = req.params.id;
+  try {
+    const result = await pool.query("DELETE FROM flashcards WHERE id = $1", [id]);
+    res.json({ message: "Card deleted", id });
+  } catch (error) {
+    console.error("Server Error", error);
+    res.status(500).json({ error: "Failed to delete card" });
+  }
+})
+
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
