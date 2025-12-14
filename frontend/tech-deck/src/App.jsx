@@ -69,6 +69,12 @@ function App() {
   return (
     <>
       <div>
+        <h2 id="app-title">
+          <span className="thin">tech</span>
+          <span className="thick">tonica - </span>
+          <span className="thick-orange">Techdeck</span>
+        </h2>
+        <p className="darkCyanText"><strong>Master Your Development Journey with Your Interactive Flashcards</strong></p>
         {/* We used async function to fetch data, but card was set to empty, index set to 0 before data fetched
         This will result nothing returned. */}
         {cards.length>0?
@@ -79,10 +85,11 @@ function App() {
               flipped={flipped}
               setFlipped={setFlipped}
             />
-            <p className='progress'>{currentIndex + 1} / {cards.length}</p>
+            <p className='progress darkCyanText'><strong>{currentIndex + 1} / {cards.length}</strong></p>
             <CardButton 
               onPrev={handlePrev}
               onNext={handleNext}
+              style={{ color: 'white', backgroundColor: '#01556e' }}
             />
             <DeleteButton 
             card={cards[currentIndex]}

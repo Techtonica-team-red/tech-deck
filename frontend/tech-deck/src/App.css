@@ -41,6 +41,31 @@
   color: #888;
 }
 
+#app-title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+}
+
+#app-title .thin {
+  font-weight: 300;
+  color: #20819c;
+}
+#app-title .thick {
+  font-weight: 700;
+  color: #01556e;
+}
+
+#app-title .thick-orange {
+  font-weight: 700;
+  color: #fc7625;
+}
+
+.darkCyanText {
+  color: #01556e;
+}
+
 .flash-card {
   height: 250px;
   width: 100%;
@@ -69,12 +94,12 @@
   font-size: 20px;
   padding: 20px;
   border-radius: 10px;
-  background: white;
-  color:black;
+  color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fc7625;
 }
 
 .card-back {
@@ -93,8 +118,8 @@
 }
 
 .meta-tag {
-  background-color: yellow;
-  border: 1px solid yellow;
+  background-color: #01556e;
+  border: 1px solid #01556e;
   padding: 6px 14px;
   border-radius: 99px;
 

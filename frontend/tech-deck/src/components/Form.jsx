@@ -1,4 +1,5 @@
 import { useState } from 'react'; 
+import './Form.css'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -83,7 +84,7 @@ export default function Form ({ onAddSuccess }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <label>
                 Question:
                 <textarea type="text" name="question" required />

@@ -1,10 +1,10 @@
 import React from 'react'
 
-const CardButton = ({ onPrev, onNext }) => {
+const CardButton = ({ onPrev, onNext, style }) => {
   return (
     <div>
-      <button onClick={onPrev}>Prev</button>
-      <button onClick={onNext}>Next</button>
+      <button style={style} onClick={onPrev}>Prev</button>
+      <button style={style} onClick={onNext}>Next</button>
     </div>
   )
 }
