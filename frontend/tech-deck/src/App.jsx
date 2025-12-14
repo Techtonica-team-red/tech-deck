@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import FlashCard from './component/FlashCard.jsx';
-import CardButton from './component/CardButton.jsx';
+import FlashCard from './components/FlashCard';
+import CardButton from './components/CardButton.jsx';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchCards = async () => {
