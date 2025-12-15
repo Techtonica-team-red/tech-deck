@@ -51,6 +51,7 @@ Link should look like something like this:
   ```DATABASE_URL='postgresql://postgres.hhahdjladshflkhdjkahsdkhjk:[YOUR-PASSWORD]@aws-0-us-northwest-5.pooler.supabase.com:543233/postgres'```
 6. Edit URL link to add database password
 7. Test connection by adding a new flashcard.
+   Here is additional [database testing resources from Supabase](https://supabase.com/docs/guides/database/testing)
 
 ## Contributions
 
